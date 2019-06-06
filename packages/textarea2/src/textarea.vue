@@ -1,12 +1,8 @@
-<!-- 参考Expanding Text Areas Made Elegant(http://alistapart.com/article/expanding-text-areas-made-elegant/) -->
-<!-- 思路就是让其它具有自适应性的元素撑开父元素，同时margin、padding、border以及文字换行行为与textarea一致即可 -->
-<!-- 不同浏览器中textarea的表现可能不一致 -->
-<!-- 将本组件放入其它容器中时，由于组件中与textarea元素同级的div元素的存在，当value为空时，会出现空白幽灵节点的问题影响父级元素的高度 -->
 <template>
   <div class="fp-textarea">
     <div
       v-if="autosize"
-      class="fp-textarea__inner2"
+      class="fp-textarea__inner-frame"
       :style="textareaCalcStyle"
     >{{value}}</div>
     <textarea
@@ -55,20 +51,39 @@ export default {
   font-size: 14px;
   width: 100%;
 }
-.fp-textarea__inner, .fp-textarea__inner2{
-  display: block;
-  resize: vertical;
+
+/* 将内部div与textarea属性中与宽高、字体和文字换行方式相关的等统一起来 */
+.fp-textarea__inner,
+.fp-textarea__inner-frame{
+  /* 宽高相关属性 */
   padding: 5px 15px;
+  border: 1px solid #dcdfe6;
   box-sizing: border-box;
   width: 100%;
+  /* 文字相关属性 */
   font-family: inherit;
   font-size: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  text-align: start;
+}
+
+.fp-textarea__inner-frame{
+  visibility: hidden;
+}
+
+.fp-textarea__inner{
+  display: block;
+  resize: vertical;
   color: #606266;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #dcdfe6;
   border-radius: 4px;
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+.fp-textarea__inner:focus {
+  outline: none;
+  border-color: #409eff;
 }
 .fp-textarea-autosize{
   position: absolute;
@@ -76,19 +91,5 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-}
-.fp-textarea__inner:focus {
-  outline: none;
-  border-color: #409eff;
-}
-.fp-textarea__inner2{
-  /* 中文强制换行 */
-  white-space: pre-wrap;
-  /* 英文强制换行 */
-  /* word-break:break-all; */
-  /* overflow-wrap: break-word; */
-  word-break: break-word;
-  text-align: start;
-  visibility: hidden;
 }
 </style>

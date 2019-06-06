@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <router-view/>
     <div>
       <autosize-textarea v-model="textValue" autosize style="width: 414px;"></autosize-textarea>
     </div>
-    <!-- <div>
-      <autosize-textarea2 v-model="textValue" :autosize="false" style="width: 414px;"></autosize-textarea2>
-    </div> -->
-    <router-view/>
+    <div>
+      <autosize-textarea2 v-model="textValue" autosize style="width: 414px;"></autosize-textarea2>
+    </div>
   </div>
 </template>
 
@@ -16,7 +15,7 @@ export default {
   name: 'App',
   data () {
     return {
-      textValue: '123'
+      textValue: ''
     }
   }
 }

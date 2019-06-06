@@ -2,6 +2,9 @@
 
 > 个人Vue练习组件
 
+- [自适应textarea实现](./doc/自适应textarea实现.md)
+- [折叠效果原理探究](./doc/折叠效果原理探究.md)
+
 ## Build Setup
 
 ``` bash
