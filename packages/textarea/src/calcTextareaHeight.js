@@ -1,5 +1,6 @@
 let hiddenTextarea
 
+// 设置绝对定位不影响父容器body高度，设置visibility和z-index用来不遮挡其它元素
 const HIDDEN_STYLE = `
   height:0 !important;
   visibility:hidden !important;
@@ -57,9 +58,11 @@ export default function calcTextareaHeight (
 ) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea')
+    // 插入到DOM中才能获取到高度
     document.body.appendChild(hiddenTextarea)
   }
 
+  // 获取文本之外的其它高度以及元素样式
   let {
     paddingSize,
     borderSize,
@@ -68,6 +71,7 @@ export default function calcTextareaHeight (
   } = calculateNodeStyling(targetElement)
 
   hiddenTextarea.setAttribute('style', `${contextStyle};${HIDDEN_STYLE}`)
+  // 给value赋值获取包含文本之后的高度
   hiddenTextarea.value = targetElement.value || targetElement.placeholder || ''
 
   let height = hiddenTextarea.scrollHeight
@@ -98,6 +102,7 @@ export default function calcTextareaHeight (
     height = Math.min(maxHeight, height)
   }
   result.height = `${height}px`
+  // debugger
   hiddenTextarea.parentNode && hiddenTextarea.parentNode.removeChild(hiddenTextarea)
   hiddenTextarea = null
   return result

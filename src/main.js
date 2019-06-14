@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import TextArea from '../packages/textarea'
 import TextArea2 from '../packages/textarea2'
+import ImageView from '../packages/image'
 
 Vue.use(TextArea)
 Vue.use(TextArea2)
+Vue.use(ImageView)
 
 Vue.config.productionTip = false
 
